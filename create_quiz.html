@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #101820;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px;
+            color: #007BFF;
+            font-weight: bold;
+            margin: 0;
+            margin-top: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        .input-field {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            font-size: 16px;
+            color: #333;
+            background-color: #f3f4f6;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+
+        .input-field::placeholder {
+            color: #999;
+        }
+
+        .input-field:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        .button {
+            width: 113%;
+            max-width: 400px;
+            padding: 15px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #aaa;
+            text-align: left;
+        }
+
+        #newQuiz {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" style="text-decoration: none; color: inherit;">
+        <h1 class="header">FLASHCARDS</h1>
+    </a>
+
+    <h1 id="newQuiz">Create a New Quiz</h1>
+    <form method="POST" action="{{ url_for('create_quiz') }}">
+        <div class="form-group">
+            <label for="title" style="display: none;">Quiz Title:</label>
+            <input type="text" name="title" class="input-field" placeholder="Quiz Name" required>
+        </div>
+        <button type="submit" class="button">Create Quiz</button>
+    </form>
+
+    <div class="footer">
+        <span>Sam Bersa</span> - <span id="current-date"></span>
+    </div>
+
+    <script>
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = today.toLocaleDateString(undefined, options);
+        document.getElementById('current-date').textContent = formattedDate;
+    </script>
+</body>
+</html>
